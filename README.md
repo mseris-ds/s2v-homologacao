@@ -1,6 +1,6 @@
 # Automação de homologação Copel + CREA — especificação para a Central S2V
 
-Especificação técnica para implementar, dentro da Central S2V, a automação do protocolo de projetos de microgeração no **PEW da Copel** e da emissão de **ART no CREA-PR**.
+Especificação técnica para implementar, dentro da Central S2V, a automação do protocolo de projetos de microgeração no **PEW da Copel** e da emissão de **ART no CREA-PR**. O escopo é só Copel: integradoras que trabalham em outras distribuidoras ficam de fora.
 
 Levantamento feito em 16/11/2026, acompanhando um projeto real do início ao fim: ART emitida, PEW preenchido e protocolado, planilha atualizada. Os dados pessoais de clientes foram removidos deste repositório e substituídos por valores de exemplo.
 
@@ -10,13 +10,14 @@ Levantamento feito em 16/11/2026, acompanhando um projeto real do início ao fim
 
 1. [Recomendação](#recomendação)
 2. [Decisões definidas](#decisões-definidas)
-3. [Arquitetura](#arquitetura)
-4. [Fluxo ponta a ponta](#fluxo-ponta-a-ponta)
-5. [Modelo de dados](#modelo-de-dados)
-6. [Regras de preenchimento](#regras-de-preenchimento)
-7. [Detalhes técnicos dos portais](#detalhes-técnicos-dos-portais)
-8. [Fases de implementação](#fases-de-implementação)
-9. [Riscos e pontos em aberto](#riscos-e-pontos-em-aberto)
+3. [Escopo: integradoras Copel](#escopo-integradoras-copel)
+4. [Arquitetura](#arquitetura)
+5. [Fluxo ponta a ponta](#fluxo-ponta-a-ponta)
+6. [Modelo de dados](#modelo-de-dados)
+7. [Regras de preenchimento](#regras-de-preenchimento)
+8. [Detalhes técnicos dos portais](#detalhes-técnicos-dos-portais)
+9. [Fases de implementação](#fases-de-implementação)
+10. [Riscos e pontos em aberto](#riscos-e-pontos-em-aberto)
 
 ## Recomendação
 
@@ -54,6 +55,30 @@ Com "Alteração de carga" em **Sim**, o PEW mostra mais quatro campos na mesma 
 A lista "Disjuntor Desejado" traz todos os disjuntores da **NTC 901100** da Copel. A ficha deve oferecer a mesma lista, montada da tabela dessa norma (tipo de ligação + corrente, no formato "Trifásico de 150 A"). A extensão escolhe no PEW o item de texto idêntico e, se não encontrar, para e avisa, em vez de escolher o mais próximo.
 
 O próprio PEW avisa que essa opção só calcula a nova potência máxima de geração. A alteração de carga em si é pedida à parte, nos canais de atendimento da Copel, com documentos, estudo de rede e custos, e tem de estar concluída antes da vistoria da GD. Por isso, quando a ficha marcar aumento de padrão, a Central cria a pendência "Solicitar alteração de carga na Copel" e só libera o pacote de vistoria depois que ela for concluída.
+
+## Escopo: integradoras Copel
+
+A automação cobre só projetos na Copel, com ART no CREA-PR e contrato de R$ 2.500. As integradoras que trabalham na Energisa ficam fora do escopo (decisão de 16/11/2026).
+
+Levantamento de 16/11/2026 nas pastas do Drive. A coluna de responsável técnico conta as ARTs das últimas 40 pastas de cada integradora.
+
+| Integradora | Pastas de clientes | RT nas ARTs | Planilha de controle |
+| --- | --- | --- | --- |
+| ANDRE - ATRAÇÃO | 102 | Lucas | HOMOLOGAÇÕES ATRAÇÃO |
+| 1SOL - ALISSON | 42 | Matheus | HOMOLOGAÇÕES 1SOL |
+| JF ASSISTENCIA | 32 | Lucas | HOMOLOGAÇÕES JF ASSISTENCIA |
+| PAVANNY ENERGIA SOLAR | 24 | Matheus | PAVANNY ENERGIA SOLAR |
+| PINHEIRO SOLAR - ALLAN | 24 | Matheus | HOMOLOGAÇÕES PINHEIRO SOLAR |
+| GENIUS ENERGY | 19 | Lucas | HOMOLOGAÇÕES GENIUS |
+| BRIDGE ENERGY | 5 | Matheus e Lucas | HOMOLOGAÇÕES BRIDGE ENERGY |
+
+O que isso muda na especificação:
+
+- **Cadastro de integradoras na Central:** nome, pasta no Drive, planilha de controle e responsável técnico padrão, que vem preenchido na ficha e pode ser trocado. As sete planilhas usam o mesmo layout de colunas (B a L) da HOMOLOGAÇÕES 1SOL.
+- **Valor do projeto:** a tabela de faixas da 1SOL não cobre tudo. Outras planilhas têm valores fora dela, como R$ 100 e R$ 150 de serviços de configuração na Pinheiro Solar. A ficha sugere o valor pela faixa e deixa editar.
+- **Diagrama unifilar:** Atração, Genius e Bridge às vezes têm diagrama na pasta, no formato da prancha do Unifilar da Central. O cadastro do projeto pode alimentar o Unifilar direto.
+- **Titular pessoa jurídica:** há clientes com CNPJ. ART e PEW precisam aceitar CNPJ além de CPF, e o documento de identidade pode vir como RG em vez de CNH.
+- **Projetos fora da Copel nas pastas:** Pinheiro Solar e JF têm um projeto cada em outra distribuidora. A Central deve identificar a distribuidora pela fatura e recusar o que não for Copel.
 
 ## Arquitetura
 
