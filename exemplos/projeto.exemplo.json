@@ -1,0 +1,94 @@
+{
+  "id": "1sol-2026-11-cliente-exemplo",
+  "empresa": {
+    "nome": "1SOL",
+    "pasta_drive": "PROJETOS TERCEIROS/1SOL - ALISSON",
+    "planilha_id": "<id da planilha HOMOLOGAÇÕES 1SOL>"
+  },
+  "status": "protocolado",
+  "responsavel_tecnico": {
+    "nome": "MATHEUS CEZARIO SERAFIM",
+    "crea": "PR-200254/D"
+  },
+  "cliente": {
+    "nome": "CLIENTE EXEMPLO",
+    "cpf": "00000000000",
+    "endereco": {
+      "logradouro": "R EXEMPLO",
+      "numero": "100",
+      "bairro": "CENTRO",
+      "cidade": "MARINGA",
+      "uf": "PR",
+      "cep": "87000000"
+    }
+  },
+  "uc": {
+    "codigo_fatura": "000000000",
+    "numero_copel": "0.000.000.000-00",
+    "ligacao": "BIFASICO",
+    "tensao_v": 220,
+    "disjuntor_a": 50
+  },
+  "gd": {
+    "modalidade": "AUTOCONSUMO_REMOTO",
+    "grid_zero": false,
+    "alteracao_carga": false,
+    "novo_padrao": null,
+    "dispensa_73a": false,
+    "beneficiarias": []
+  },
+  "modulos": [
+    {
+      "fabricante": "RONMA SOLAR",
+      "modelo": "RM-620W-182R/132TB",
+      "qtd": 9,
+      "potencia_w": 620,
+      "area_unit_m2": 2.7012,
+      "fonte_area": "datasheet RM-600-630W-182R/132TB, 2382x1134 mm"
+    }
+  ],
+  "inversores": [
+    {
+      "fabricante": "GROWATT",
+      "modelo": "MIN 5000TL-X2",
+      "qtd": 1,
+      "potencia_kw": 5,
+      "inmetro": "003570/2024",
+      "inmetro_status": "Ativo",
+      "inmetro_verificado_em": "2026-11-16"
+    }
+  ],
+  "calculado": {
+    "kwp": 5.58,
+    "kw_ca": 5,
+    "area_total_m2": 24.31,
+    "valor_projeto": 300
+  },
+  "art": {
+    "numero": "0000000000000",
+    "copiada_de": "0000000000000",
+    "valor_contrato": 2500,
+    "inicio": "2026-11-16",
+    "termino": "2026-12-16",
+    "boleto_venc": "2026-11-26",
+    "taxa": 108.39,
+    "paga": false
+  },
+  "pew": {
+    "protocolo": "00000000000000",
+    "enviado_em": "2026-11-16",
+    "status": "AGUARDANDO ANALISE",
+    "email_adicional": "engenharia@s2vengenharia.com"
+  },
+  "arquivos": {
+    "boleto_art": "BOLETO ART CLIENTE EXEMPLO.pdf",
+    "print_pew": "PEW CLIENTE EXEMPLO.png"
+  },
+  "auditoria": [
+    {
+      "em": "2026-11-16T16:15",
+      "quem": "matheus",
+      "acao": "aprovou_ficha"
+    }
+  ]
+}
